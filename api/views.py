@@ -4,15 +4,19 @@ from django.db.models import F, ExpressionWrapper, FloatField, Func
 from django.db.models.functions import ACos, Abs, Cos, Sin
 from math import pi
 
+from rest_framework.permissions import IsAuthenticated
+
 from .models import Point, Message
 from .serializers import PointSerializer, MessageSerializer
 
 
 class PointCreate(CreateAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = Point.objects.all()
     serializer_class = PointSerializer
 
 class PointList(ListAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = Point.objects.all()
     serializer_class = PointSerializer
 
@@ -30,10 +34,12 @@ class PointList(ListAPIView):
                                            Cos(pi/180*latitude)*Cos(pi/180*F('longitude')-pi/180*longitude))).filter(dist__lte=radius/EARTH_RADIUS)
 
 class MessageCreate(CreateAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
 
 class MessageList(ListAPIView):
+    permission_classes = (IsAuthenticated,)
     serializer_class = MessageSerializer
 
     def get_queryset(self):
