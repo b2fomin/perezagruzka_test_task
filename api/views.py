@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from rest_framework.generics import CreateAPIView
 
-# Create your views here.
+from .models import Point
+from .serializers import PointSerializer
+
+
+class PointCreate(CreateAPIView):
+    queryset = Point.objects.all()
+    serializer_class = PointSerializer
