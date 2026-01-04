@@ -7,4 +7,4 @@ class Point(models.Model):
 
 class Message(models.Model):
     message = models.TextField(max_length=500)
-    point = models.ForeignKey(Point, on_delete=models.CASCADE)
+    point = models.ForeignKey(Point, on_delete=models.CASCADE, related_name='messages')

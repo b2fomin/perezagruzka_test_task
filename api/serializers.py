@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from .models import Point
+from .models import Point, Message
 
 
 class PointSerializer(serializers.ModelSerializer):
@@ -19,3 +19,11 @@ class PointSerializer(serializers.ModelSerializer):
         if longitude > 90 or latitude < -90:
             raise ValidationError('wrong longitude or latitude')
         return data
+
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = [
+            'point',
+            'message'
+        ]
