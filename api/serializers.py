@@ -16,7 +16,7 @@ class PointSerializer(serializers.ModelSerializer):
     def validate(self, data):
         longitude = data['longitude']
         latitude = data['latitude']
-        if longitude > 90 or latitude < -90:
+        if longitude > 90 or longitude < -90 or latitude > 180 or latitude < -180:
             raise ValidationError('wrong longitude or latitude')
         return data
 
